@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(250 100% 99%);
+  --foreground: hsl(210 25% 7.8431%);
+  --card: hsl(250 50% 98%);
+  --card-foreground: hsl(210 25% 7.8431%);
+  --popover: hsl(250 100% 99%);
+  --popover-foreground: hsl(210 25% 7.8431%);
+  --primary: hsl(221 83.2% 53.3%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(215 27.9% 16.9%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(215 20.2% 95.1%);
+  --muted-foreground: hsl(215 13.8% 34.1%);
+  --accent: hsl(210 40% 94%);
+  --accent-foreground: hsl(215 25% 26.9%);
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(215 27.9% 89%);
+  --input: hsl(215 27.9% 97%);
+  --ring: hsl(221 83.2% 53.3%);
+  
+  /* Vercel-inspired grays */
+  --vercel-gray-50: hsl(0 0% 98%);
+  --vercel-gray-100: hsl(240 5% 96%);
+  --vercel-gray-200: hsl(240 6% 90%);
+  --vercel-gray-300: hsl(240 5% 84%);
+  --vercel-gray-400: hsl(240 5% 65%);
+  --vercel-gray-500: hsl(240 4% 46%);
+  --vercel-gray-600: hsl(240 5% 34%);
+  --vercel-gray-700: hsl(240 5% 26%);
+  --vercel-gray-800: hsl(240 4% 16%);
+  --vercel-gray-900: hsl(240 6% 10%);
+  --vercel-gray-950: hsl(240 7% 6%);
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: 'JetBrains Mono', Consolas, monospace;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: hsl(240 7% 6%);
+  --foreground: hsl(0 0% 91%);
+  --card: hsl(240 6% 10%);
+  --card-foreground: hsl(0 0% 91%);
+  --popover: hsl(240 7% 6%);
+  --popover-foreground: hsl(0 0% 91%);
+  --primary: hsl(217 91% 60%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(215 20% 94%);
+  --secondary-foreground: hsl(215 25% 27%);
+  --muted: hsl(240 4% 16%);
+  --muted-foreground: hsl(240 5% 65%);
+  --accent: hsl(240 5% 26%);
+  --accent-foreground: hsl(0 0% 91%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(0 0% 100%);
+  --border: hsl(240 5% 26%);
+  --input: hsl(240 5% 26%);
+  --ring: hsl(217 91% 60%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .animate-pulse-subtle {
+    animation: pulseSubtle 2s infinite;
+  }
+  
+  @keyframes fadeIn {
+    0% { 
+      opacity: 0; 
+      transform: translateY(10px); 
+    }
+    100% { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+  
+  @keyframes slideUp {
+    0% { 
+      transform: translateY(10px); 
+      opacity: 0; 
+    }
+    100% { 
+      transform: translateY(0); 
+      opacity: 1; 
+    }
+  }
+  
+  @keyframes pulseSubtle {
+    0%, 100% { 
+      opacity: 1; 
+    }
+    50% { 
+      opacity: 0.8; 
+    }
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--muted);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--muted-foreground);
+  }
+  
+  /* Syntax highlighting styles */
+  .syntax-highlight {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  
+  .syntax-highlight .keyword {
+    color: hsl(270 70% 60%);
+  }
+  
+  .syntax-highlight .string {
+    color: hsl(120 50% 45%);
+  }
+  
+  .syntax-highlight .number {
+    color: hsl(35 90% 55%);
+  }
+  
+  .syntax-highlight .comment {
+    color: var(--muted-foreground);
+    font-style: italic;
+  }
+  
+  .syntax-highlight .error {
+    color: hsl(0 84% 60%);
+    font-weight: 600;
+  }
+}
