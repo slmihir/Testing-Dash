@@ -6,6 +6,8 @@ import { SummaryDashboard } from "@/components/PlaywrightReport/SummaryDashboard
 import { FilterBar } from "@/components/PlaywrightReport/FilterBar";
 import { TestResultCard } from "@/components/PlaywrightReport/TestResultCard";
 import { ThemeProvider } from "@/components/PlaywrightReport/ThemeProvider";
+import { Charts } from "@/components/PlaywrightReport/Charts";
+import { TrendChart } from "@/components/PlaywrightReport/TrendChart";
 import { Button } from "@/components/ui/button";
 import { TestResult, TestSuite } from "@shared/schema";
 
@@ -84,6 +86,10 @@ export default function PlaywrightReport() {
         
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <SummaryDashboard testSuite={testSuite} />
+          
+          <Charts testSuite={testSuite} testResults={testResults || []} />
+          
+          <TrendChart />
           
           <FilterBar
             totalTests={filteredTests.length}
