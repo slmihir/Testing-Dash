@@ -154,76 +154,76 @@ export function Charts({ testSuite, testResults }: ChartsProps) {
     icon: any;
     color: string;
   }) => (
-    <div className="bg-white/80 dark:bg-vercel-gray-900/80 rounded-2xl p-6 backdrop-blur-sm shadow-sm border border-vercel-gray-200/60 dark:border-vercel-gray-800/60">
+    <div className="bg-white dark:bg-vercel-gray-900 rounded-xl p-5 shadow-sm border border-vercel-gray-200/60 dark:border-vercel-gray-800/60">
       <div className="flex items-center justify-between mb-4">
-        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${color}`}>
-          <Icon className="w-5 h-5 text-white" />
+        <div className="w-9 h-9 rounded-md flex items-center justify-center ring-1 ring-inset ring-vercel-gray-200 dark:ring-vercel-gray-800">
+          <Icon className="w-5 h-5 text-vercel-gray-700 dark:text-vercel-gray-300" />
         </div>
         <div className="text-right">
-          <div className="text-2xl font-bold text-vercel-gray-900 dark:text-vercel-gray-100">
+          <div className="text-xl font-semibold text-vercel-gray-900 dark:text-vercel-gray-100 tabular-nums">
             {value}
           </div>
-          <div className="text-sm text-green-600 dark:text-green-400 flex items-center">
+          <div className="text-xs text-green-700 dark:text-green-400/90 flex items-center">
             <TrendingUp className="w-3 h-3 mr-1" />
             {change}
           </div>
         </div>
       </div>
-      <div className="text-sm font-medium text-vercel-gray-600 dark:text-vercel-gray-400">
+      <div className="text-xs font-medium text-vercel-gray-700 dark:text-vercel-gray-300">
         {title}
       </div>
     </div>
   );
 
   return (
-    <section className="mb-12 animate-fade-in">
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold bg-gradient-to-r from-vercel-gray-900 to-vercel-gray-600 dark:from-white dark:to-vercel-gray-300 bg-clip-text text-transparent mb-2">
-          Analytics & Insights
+    <section className="mb-10 animate-fade-in">
+      <div className="mb-4">
+        <h2 className="text-base font-semibold tracking-[-0.01em] text-vercel-gray-900 dark:text-vercel-gray-100 mb-1">
+          Analytics
         </h2>
-        <p className="text-vercel-gray-600 dark:text-vercel-gray-400">
-          Visual overview of your test performance and metrics
+        <p className="text-xs text-vercel-gray-600 dark:text-vercel-gray-400">
+          Your test performance at a glance
         </p>
       </div>
 
       {/* Metrics Row */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <MetricCard
           title="Average Duration"
           value={`${(avgDuration / 1000).toFixed(1)}s`}
           change="+12% faster"
           icon={Clock}
-          color="bg-gradient-to-br from-blue-500 to-blue-600"
+          color=""
         />
         <MetricCard
           title="Success Rate"
           value={`${Math.round(passedPercentage)}%`}
           change="+5% improved"
           icon={Target}
-          color="bg-gradient-to-br from-green-500 to-green-600"
+          color=""
         />
         <MetricCard
           title="Test Velocity"
           value={`${Math.round(totalTests / (testSuite.duration / 60000))} /min`}
           change="+8% faster"
           icon={Zap}
-          color="bg-gradient-to-br from-purple-500 to-purple-600"
+          color=""
         />
         <MetricCard
           title="Reliability Score"
           value={`${Math.round(95 + Math.random() * 4)}%`}
           change="+3% better"
           icon={TrendingUp}
-          color="bg-gradient-to-br from-orange-500 to-orange-600"
+          color=""
         />
       </div>
 
       {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Test Results Distribution */}
-        <Card className="bg-white/80 dark:bg-vercel-gray-900/80 backdrop-blur-sm shadow-sm border-0 rounded-2xl">
-          <CardContent className="p-8">
-            <h3 className="text-lg font-semibold text-vercel-gray-900 dark:text-vercel-gray-100 mb-6">
+        <Card className="bg-white dark:bg-vercel-gray-900 shadow-sm border border-vercel-gray-200/60 dark:border-vercel-gray-800/60 rounded-xl">
+          <CardContent className="p-6">
+            <h3 className="text-sm font-semibold tracking-[-0.01em] text-vercel-gray-900 dark:text-vercel-gray-100 mb-4">
               Test Results Distribution
             </h3>
             <DonutChart />
@@ -231,27 +231,27 @@ export function Charts({ testSuite, testResults }: ChartsProps) {
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span className="text-sm font-medium text-vercel-gray-600 dark:text-vercel-gray-400">Passed</span>
+                  <span className="text-xs font-medium text-vercel-gray-600 dark:text-vercel-gray-400">Passed</span>
                 </div>
-                <span className="text-sm font-bold text-vercel-gray-900 dark:text-vercel-gray-100">
+                <span className="text-xs font-semibold text-vercel-gray-900 dark:text-vercel-gray-100">
                   {testSuite.passedTests}
                 </span>
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <span className="text-sm font-medium text-vercel-gray-600 dark:text-vercel-gray-400">Failed</span>
+                  <span className="text-xs font-medium text-vercel-gray-600 dark:text-vercel-gray-400">Failed</span>
                 </div>
-                <span className="text-sm font-bold text-vercel-gray-900 dark:text-vercel-gray-100">
+                <span className="text-xs font-semibold text-vercel-gray-900 dark:text-vercel-gray-100">
                   {testSuite.failedTests}
                 </span>
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <span className="text-sm font-medium text-vercel-gray-600 dark:text-vercel-gray-400">Skipped</span>
+                  <span className="text-xs font-medium text-vercel-gray-600 dark:text-vercel-gray-400">Skipped</span>
                 </div>
-                <span className="text-sm font-bold text-vercel-gray-900 dark:text-vercel-gray-100">
+                <span className="text-xs font-semibold text-vercel-gray-900 dark:text-vercel-gray-100">
                   {testSuite.skippedTests}
                 </span>
               </div>
@@ -260,9 +260,9 @@ export function Charts({ testSuite, testResults }: ChartsProps) {
         </Card>
 
         {/* Browser Distribution */}
-        <Card className="bg-white/80 dark:bg-vercel-gray-900/80 backdrop-blur-sm shadow-sm border-0 rounded-2xl">
-          <CardContent className="p-8">
-            <h3 className="text-lg font-semibold text-vercel-gray-900 dark:text-vercel-gray-100 mb-6">
+        <Card className="bg-white dark:bg-vercel-gray-900 shadow-sm border border-vercel-gray-200/60 dark:border-vercel-gray-800/60 rounded-xl">
+          <CardContent className="p-6">
+            <h3 className="text-sm font-semibold tracking-[-0.01em] text-vercel-gray-900 dark:text-vercel-gray-100 mb-4">
               Browser Coverage
             </h3>
             <BrowserChart />
@@ -270,14 +270,14 @@ export function Charts({ testSuite, testResults }: ChartsProps) {
         </Card>
 
         {/* Performance Metrics */}
-        <Card className="bg-white/80 dark:bg-vercel-gray-900/80 backdrop-blur-sm shadow-sm border-0 rounded-2xl">
-          <CardContent className="p-8">
-            <h3 className="text-lg font-semibold text-vercel-gray-900 dark:text-vercel-gray-100 mb-6">
+        <Card className="bg-white dark:bg-vercel-gray-900 shadow-sm border border-vercel-gray-200/60 dark:border-vercel-gray-800/60 rounded-xl">
+          <CardContent className="p-6">
+            <h3 className="text-sm font-semibold tracking-[-0.01em] text-vercel-gray-900 dark:text-vercel-gray-100 mb-4">
               Test Performance
             </h3>
             <PerformanceChart />
-            <div className="mt-6 pt-4 border-t border-vercel-gray-200/60 dark:border-vercel-gray-700/60">
-              <div className="text-sm text-vercel-gray-600 dark:text-vercel-gray-400">
+            <div className="mt-5 pt-3 border-t border-vercel-gray-200/60 dark:border-vercel-gray-700/60">
+              <div className="text-xs text-vercel-gray-600 dark:text-vercel-gray-400">
                 <span className="font-medium">Avg Duration:</span> {(avgDuration / 1000).toFixed(1)}s
               </div>
             </div>

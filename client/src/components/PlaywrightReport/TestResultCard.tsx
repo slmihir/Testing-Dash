@@ -81,23 +81,23 @@ export function TestResultCard({ test }: TestResultCardProps) {
   ] : [];
 
   const cardClasses = test.status === 'failed' 
-    ? "border-red-200 dark:border-red-900/30 hover:shadow-lg"
-    : "border-vercel-gray-200 dark:border-vercel-gray-800 hover:shadow-lg";
+    ? "border-red-200/70 dark:border-red-900/30 hover:shadow-sm"
+    : "border-vercel-gray-200/70 dark:border-vercel-gray-800/70 hover:shadow-sm";
 
   return (
-    <Card className={`${cardClasses} transition-all duration-300 group`}>
-      <CardContent className="p-6">
+    <Card className={`${cardClasses} transition-all duration-200 group rounded-xl`}>
+      <CardContent className="p-5">
         <div className="flex items-start justify-between">
           <div className="flex items-start space-x-4 flex-1">
             <div className={getStatusDot(test.status)} />
             <div className="flex-1">
-              <div className="flex items-center space-x-3 mb-2">
-                <h3 className="text-lg font-semibold text-vercel-gray-900 dark:text-vercel-gray-100">
+              <div className="flex items-center space-x-3 mb-1.5">
+                <h3 className="text-base font-semibold tracking-[-0.01em] text-vercel-gray-900 dark:text-vercel-gray-100">
                   {test.title}
                 </h3>
                 {getStatusBadge(test.status)}
               </div>
-              <p className="text-sm text-vercel-gray-600 dark:text-vercel-gray-400 mb-3">
+              <p className="text-sm text-vercel-gray-600 dark:text-vercel-gray-400 mb-3 leading-relaxed">
                 {test.description}
               </p>
               
@@ -122,7 +122,7 @@ export function TestResultCard({ test }: TestResultCardProps) {
             <Button
               variant="ghost"
               size="icon"
-              className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-vercel-gray-50 dark:bg-vercel-gray-800 hover:bg-vercel-gray-100 dark:hover:bg-vercel-gray-700"
+              className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 hover:bg-vercel-gray-50 dark:hover:bg-vercel-gray-800"
             >
               <ExternalLink className="w-4 h-4 text-vercel-gray-500 dark:text-vercel-gray-400" />
             </Button>
@@ -130,7 +130,7 @@ export function TestResultCard({ test }: TestResultCardProps) {
               variant="ghost"
               size="icon"
               onClick={() => setIsExpanded(!isExpanded)}
-              className="bg-vercel-gray-50 dark:bg-vercel-gray-800 hover:bg-vercel-gray-100 dark:hover:bg-vercel-gray-700"
+              className="hover:bg-vercel-gray-50 dark:hover:bg-vercel-gray-800"
             >
               <ChevronDown 
                 className={`w-4 h-4 text-vercel-gray-500 dark:text-vercel-gray-400 transform transition-transform duration-200 ${
@@ -143,21 +143,21 @@ export function TestResultCard({ test }: TestResultCardProps) {
       </CardContent>
       
       {isExpanded && (
-        <div className={`border-t ${test.status === 'failed' ? 'border-red-100/60 dark:border-red-900/30 bg-gradient-to-br from-red-50/50 to-red-25/50 dark:from-red-950/20 dark:to-red-900/10' : 'border-vercel-gray-100/60 dark:border-vercel-gray-800/60 bg-gradient-to-br from-vercel-gray-50/50 to-vercel-gray-25/50 dark:from-vercel-gray-950/30 dark:to-vercel-gray-900/50'} backdrop-blur-sm`}>
-          <div className="p-8 space-y-6">
+        <div className={`border-t ${test.status === 'failed' ? 'border-red-100/60 dark:border-red-900/30 bg-red-50/40 dark:bg-red-950/10' : 'border-vercel-gray-100/60 dark:border-vercel-gray-800/60 bg-vercel-gray-50/40 dark:bg-vercel-gray-900/30'}`}>
+          <div className="p-6 space-y-6">
             {/* AI Insights */}
             {aiInsights.length > 0 && (
-              <div className="bg-gradient-to-r from-blue-50/80 to-purple-50/80 dark:from-blue-950/30 dark:to-purple-950/30 rounded-2xl p-6 border border-blue-200/60 dark:border-blue-800/60 mb-6 backdrop-blur-sm shadow-sm">
+              <div className="rounded-xl p-5 border border-blue-200/60 dark:border-blue-800/60 mb-4 bg-white dark:bg-vercel-gray-900">
                 <div className="flex items-center space-x-3 mb-4">
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                    <Brain className="w-4 h-4 text-white" />
+                  <div className="w-8 h-8 rounded-md flex items-center justify-center ring-1 ring-inset ring-vercel-gray-200 dark:ring-vercel-gray-800">
+                    <Brain className="w-4 h-4 text-blue-700 dark:text-blue-300" />
                   </div>
-                  <h4 className="text-base font-semibold text-blue-900 dark:text-blue-200">AI Insights</h4>
+                  <h4 className="text-sm font-semibold text-vercel-gray-900 dark:text-vercel-gray-100">Insights</h4>
                 </div>
                 <div className="space-y-3">
                   {aiInsights.map((insight, index) => (
                     <div key={index} className="flex items-start space-x-3 text-sm">
-                      <Lightbulb className="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                      <Lightbulb className="w-4 h-4 text-yellow-600 dark:text-yellow-400 mt-0.5 flex-shrink-0" />
                       <span className="text-vercel-gray-700 dark:text-vercel-gray-300 leading-relaxed">{insight}</span>
                     </div>
                   ))}
@@ -166,9 +166,9 @@ export function TestResultCard({ test }: TestResultCardProps) {
             )}
 
             {test.status === 'failed' && (test.errorMessage || test.errorStack) && (
-              <div className="bg-white dark:bg-vercel-gray-800 rounded-lg p-4 border-l-4 border-red-500 mb-4">
-                <h4 className="text-sm font-medium text-red-900 dark:text-red-200 mb-2">Error Details</h4>
-                <div className="bg-vercel-gray-100 dark:bg-vercel-gray-900 rounded-md p-3 font-mono text-sm overflow-x-auto">
+              <div className="bg-white dark:bg-vercel-gray-900 rounded-lg p-4 ring-1 ring-red-200/60 dark:ring-red-900/40 mb-4">
+                <h4 className="text-sm font-medium text-red-900 dark:text-red-200 mb-2">Error details</h4>
+                <div className="bg-vercel-gray-50 dark:bg-vercel-gray-950 rounded-md p-3 font-mono text-xs overflow-x-auto">
                   <pre className="text-red-700 dark:text-red-300 syntax-highlight">
                     {test.errorMessage && (
                       <div className="error">{test.errorMessage}</div>
@@ -184,8 +184,8 @@ export function TestResultCard({ test }: TestResultCardProps) {
             )}
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-white/80 dark:bg-vercel-gray-800/80 rounded-2xl p-6 backdrop-blur-sm shadow-sm border border-vercel-gray-200/60 dark:border-vercel-gray-700/60">
-                <h4 className="text-base font-semibold text-vercel-gray-900 dark:text-vercel-gray-100 mb-4">
+              <div className="bg-white dark:bg-vercel-gray-900 rounded-xl p-5 shadow-sm border border-vercel-gray-200/60 dark:border-vercel-gray-800/60">
+                <h4 className="text-sm font-semibold text-vercel-gray-900 dark:text-vercel-gray-100 mb-3">
                   {test.status === 'failed' ? 'Failed Steps' : 'Steps'}
                 </h4>
                 <div className="space-y-2 text-sm text-vercel-gray-600 dark:text-vercel-gray-400">
@@ -206,8 +206,8 @@ export function TestResultCard({ test }: TestResultCardProps) {
                 </div>
               </div>
               
-              <div className="bg-white/80 dark:bg-vercel-gray-800/80 rounded-2xl p-6 backdrop-blur-sm shadow-sm border border-vercel-gray-200/60 dark:border-vercel-gray-700/60">
-                <h4 className="text-base font-semibold text-vercel-gray-900 dark:text-vercel-gray-100 mb-4">Attachments</h4>
+              <div className="bg-white dark:bg-vercel-gray-900 rounded-xl p-5 shadow-sm border border-vercel-gray-200/60 dark:border-vercel-gray-800/60">
+                <h4 className="text-sm font-semibold text-vercel-gray-900 dark:text-vercel-gray-100 mb-3">Attachments</h4>
                 <div className="space-y-2">
                   {attachments.length > 0 ? attachments.map((attachment, index) => {
                     const getAttachmentStyle = (type: string) => {
@@ -236,7 +236,7 @@ export function TestResultCard({ test }: TestResultCardProps) {
                       <Button
                         key={index}
                         variant="ghost"
-                        className={`w-full justify-start px-3 py-2 text-sm rounded-md transition-colors duration-200 ${getAttachmentStyle(attachment.type)}`}
+                        className={`w-full justify-start px-3 py-2 text-sm rounded-md transition-colors duration-150 ${getAttachmentStyle(attachment.type)}`}
                       >
                         {getAttachmentIcon(attachment.type)}
                         <span className="ml-2">{attachment.name}</span>
@@ -248,8 +248,8 @@ export function TestResultCard({ test }: TestResultCardProps) {
                 </div>
               </div>
               
-              <div className="bg-white/80 dark:bg-vercel-gray-800/80 rounded-2xl p-6 backdrop-blur-sm shadow-sm border border-vercel-gray-200/60 dark:border-vercel-gray-700/60">
-                <h4 className="text-base font-semibold text-vercel-gray-900 dark:text-vercel-gray-100 mb-4">Performance</h4>
+              <div className="bg-white dark:bg-vercel-gray-900 rounded-xl p-5 shadow-sm border border-vercel-gray-200/60 dark:border-vercel-gray-800/60">
+                <h4 className="text-sm font-semibold text-vercel-gray-900 dark:text-vercel-gray-100 mb-3">Performance</h4>
                 <div className="space-y-3">
                   <div>
                     <div className="flex justify-between text-sm mb-1">

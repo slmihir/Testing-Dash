@@ -25,17 +25,17 @@ export function FilterBar({
 }: FilterBarProps) {
   return (
     <section className="mb-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div className="flex items-center space-x-4">
-          <h2 className="text-xl font-semibold text-vercel-gray-900 dark:text-white">Test Results</h2>
-          <span className="px-3 py-1 text-sm bg-vercel-gray-100 dark:bg-vercel-gray-800 text-vercel-gray-600 dark:text-vercel-gray-400 rounded-full">
+          <h2 className="text-base font-semibold tracking-[-0.01em] text-vercel-gray-900 dark:text-white">Test results</h2>
+          <span className="px-2.5 py-1 text-xs bg-white dark:bg-vercel-gray-900 text-vercel-gray-600 dark:text-vercel-gray-400 rounded-full ring-1 ring-inset ring-vercel-gray-200 dark:ring-vercel-gray-800">
             {totalTests} tests
           </span>
         </div>
         
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center gap-3">
           <Select value={statusFilter} onValueChange={onStatusFilterChange}>
-            <SelectTrigger className="w-32 bg-white dark:bg-vercel-gray-900 border-vercel-gray-200 dark:border-vercel-gray-800">
+            <SelectTrigger className="w-32 bg-white dark:bg-vercel-gray-900 border-vercel-gray-200 dark:border-vercel-gray-800 focus:ring-0 focus:ring-offset-0">
               <SelectValue placeholder="All Status" />
             </SelectTrigger>
             <SelectContent>
@@ -47,7 +47,7 @@ export function FilterBar({
           </Select>
           
           <Select value={browserFilter} onValueChange={onBrowserFilterChange}>
-            <SelectTrigger className="w-36 bg-white dark:bg-vercel-gray-900 border-vercel-gray-200 dark:border-vercel-gray-800">
+            <SelectTrigger className="w-36 bg-white dark:bg-vercel-gray-900 border-vercel-gray-200 dark:border-vercel-gray-800 focus:ring-0 focus:ring-offset-0">
               <SelectValue placeholder="All Browsers" />
             </SelectTrigger>
             <SelectContent>
@@ -58,7 +58,7 @@ export function FilterBar({
             </SelectContent>
           </Select>
           
-          <Button variant="outline" className="bg-vercel-gray-100 dark:bg-vercel-gray-800 hover:bg-vercel-gray-200 dark:hover:bg-vercel-gray-700">
+          <Button variant="outline" className="bg-white dark:bg-vercel-gray-900 hover:bg-vercel-gray-50 dark:hover:bg-vercel-gray-800 border-vercel-gray-200 dark:border-vercel-gray-800">
             <Filter className="w-4 h-4 mr-2" />
             More Filters
           </Button>

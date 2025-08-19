@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Play, ArrowUp, Zap, Clock, Shield } from "lucide-react";
 import { Header } from "@/components/PlaywrightReport/Header";
 import { SummaryDashboard } from "@/components/PlaywrightReport/SummaryDashboard";
@@ -16,6 +16,7 @@ export default function PlaywrightReport() {
   const [statusFilter, setStatusFilter] = useState("all");
   const [browserFilter, setBrowserFilter] = useState("all");
   const [visibleTests, setVisibleTests] = useState(10);
+  const queryClient = useQueryClient();
 
   const { data: testSuite, isLoading: isSuiteLoading } = useQuery<TestSuite>({
     queryKey: ['/api/test-suite'],
@@ -87,6 +88,9 @@ export default function PlaywrightReport() {
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <SummaryDashboard testSuite={testSuite} />
           
+          <Charts testSuite={testSuite} testResults={testResults || []} />
+          
+          <TrendChart />
           
           <FilterBar
             totalTests={filteredTests.length}
@@ -138,7 +142,13 @@ export default function PlaywrightReport() {
         <div className="fixed bottom-6 right-6 flex flex-col space-y-3">
           <Button
             size="icon"
-            className="w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+            onClick={async () => {
+              await Promise.all([
+                queryClient.invalidateQueries({ queryKey: ['/api/test-suite'] }),
+                queryClient.invalidateQueries({ queryKey: ['/api/test-results'] }),
+              ]);
+            }}
+            className="w-12 h-12 bg-vercel-gray-900 hover:bg-black text-white rounded-full shadow-md hover:shadow-lg transition-all duration-200"
           >
             <Play className="w-4 h-4" />
           </Button>
@@ -146,7 +156,7 @@ export default function PlaywrightReport() {
             onClick={scrollToTop}
             size="icon"
             variant="secondary"
-            className="w-12 h-12 bg-vercel-gray-800 dark:bg-vercel-gray-700 hover:bg-vercel-gray-900 dark:hover:bg-vercel-gray-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+            className="w-12 h-12 bg-vercel-gray-800 dark:bg-vercel-gray-700 hover:bg-vercel-gray-900 dark:hover:bg-vercel-gray-600 text-white rounded-full shadow-md hover:shadow-lg transition-all duration-200"
           >
             <ArrowUp className="w-4 h-4" />
           </Button>
