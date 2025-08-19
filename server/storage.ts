@@ -21,118 +21,186 @@ export class MemStorage implements IStorage {
     // Initialize with sample test suite
     this.testSuite = {
       id: randomUUID(),
-      name: "Playwright Test Suite",
-      totalTests: 267,
-      passedTests: 247,
-      failedTests: 12,
-      skippedTests: 8,
-      duration: 272000, // 4m 32s in milliseconds
+      name: "AI-Generated E-commerce Test Suite",
+      totalTests: 7,
+      passedTests: 5,
+      failedTests: 1,
+      skippedTests: 1,
+      duration: 89000, // 1m 29s in milliseconds
       timestamp: new Date().toISOString(),
     };
 
-    // Initialize with sample test results
+    // Initialize with sample test results - AI-generated business scenarios
     const sampleTests: Omit<TestResult, 'id'>[] = [
       {
-        title: "User Authentication Flow",
-        description: "tests/auth/login.spec.ts › User can log in with valid credentials",
+        title: "Customer Login Journey",
+        description: "🤖 AI-Generated from: 'Customers should be able to sign in and access their account dashboard'",
         status: "passed",
         duration: 2400,
         browser: "Chromium",
-        viewport: "Desktop",
+        viewport: "Desktop (1920x1080)",
         errorMessage: null,
         errorStack: null,
         steps: [
-          { description: "Navigate to login page", status: "passed" },
-          { description: "Enter valid credentials", status: "passed" },
-          { description: "Verify dashboard redirect", status: "passed" }
+          { description: "Navigate to login page (/login)", status: "passed" },
+          { description: "Enter customer email (test@example.com)", status: "passed" },
+          { description: "Enter password securely", status: "passed" },
+          { description: "Click 'Sign In' button", status: "passed" },
+          { description: "Verify redirect to dashboard (/dashboard)", status: "passed" },
+          { description: "Confirm user profile displays correctly", status: "passed" }
         ],
         attachments: [
-          { name: "screenshot.png", type: "image", path: "/screenshots/login-success.png" },
-          { name: "test-video.webm", type: "video", path: "/videos/login-test.webm" }
+          { name: "login-success.png", type: "image", path: "/screenshots/login-success.png" },
+          { name: "login-flow.webm", type: "video", path: "/videos/login-flow.webm" }
         ],
         performance: { setup: 200, execution: 2200 }
       },
       {
-        title: "Shopping Cart Functionality",
-        description: "tests/ecommerce/cart.spec.ts › User can add items to cart",
+        title: "Product Purchase Flow",
+        description: "🤖 AI-Generated from: 'Users should be able to browse products, add items to cart, and complete checkout'",
         status: "failed",
         duration: 1800,
         browser: "Firefox",
-        viewport: "Mobile",
-        errorMessage: "AssertionError: Expected element to be visible",
-        errorStack: `AssertionError: Expected element to be visible
-  at tests/ecommerce/cart.spec.ts:23:5
-  at Object.<anonymous> (cart.spec.ts:45:12)
+        viewport: "Mobile (375x667)",
+        errorMessage: "Timeout: Element not visible within 5 seconds - AI detected dynamic loading issue",
+        errorStack: `TimeoutError: Element [data-testid="add-to-cart-btn"] not visible
+  at ai-generated/product-purchase.spec.ts:34:8
+  at waitForElement (ai-utils.ts:12:5)
 
-Selector: [data-testid="add-to-cart-button"]
-Actual: hidden
-Expected: visible`,
+🤖 AI Analysis: Mobile viewport detected slower DOM rendering
+💡 Self-healing: Increasing wait timeout from 5s to 8s for mobile devices`,
         steps: [
-          { description: "Navigate to product page", status: "passed" },
-          { description: "Select product variant", status: "passed" },
-          { description: "Click add to cart button", status: "failed" }
+          { description: "Navigate to product catalog (/products)", status: "passed" },
+          { description: "Filter by category: Electronics", status: "passed" },
+          { description: "Select product: iPhone 15", status: "passed" },
+          { description: "Choose variant: 128GB Blue", status: "passed" },
+          { description: "Add to cart (mobile viewport)", status: "failed" },
+          { description: "Navigate to checkout", status: "skipped" }
         ],
         attachments: [
-          { name: "failure-screenshot.png", type: "image", path: "/screenshots/cart-failure.png" },
-          { name: "console-logs.txt", type: "text", path: "/logs/console-errors.txt" }
+          { name: "mobile-cart-failure.png", type: "image", path: "/screenshots/mobile-cart-failure.png" },
+          { name: "ai-analysis.txt", type: "text", path: "/logs/ai-analysis.txt" },
+          { name: "network-timing.json", type: "text", path: "/logs/network-timing.json" }
         ],
         performance: { setup: 300, execution: 1500 }
       },
       {
-        title: "Payment Integration",
-        description: "tests/payment/stripe.spec.ts › Process payment with Stripe",
+        title: "Customer Support Chat",
+        description: "🤖 AI-Generated from: 'Customers should be able to contact support through live chat'",
         status: "skipped",
         duration: 0,
         browser: "Chromium",
-        viewport: "Desktop",
+        viewport: "Desktop (1920x1080)",
         errorMessage: null,
         errorStack: null,
-        steps: [],
+        steps: [
+          { description: "🚫 Skipped: Chat widget requires API key configuration", status: "skipped" }
+        ],
         attachments: [],
         performance: { setup: 0, execution: 0 }
       },
       {
-        title: "User Profile Management",
-        description: "tests/profile/update.spec.ts › User can update profile information",
+        title: "Account Settings Update",
+        description: "🤖 AI-Generated from: 'Users should be able to update their profile information and preferences'",
         status: "passed",
         duration: 3200,
         browser: "WebKit",
-        viewport: "Desktop",
+        viewport: "Desktop (1920x1080)",
         errorMessage: null,
         errorStack: null,
         steps: [
-          { description: "Navigate to profile page", status: "passed" },
-          { description: "Update user information", status: "passed" },
-          { description: "Save changes", status: "passed" },
-          { description: "Verify success message", status: "passed" }
+          { description: "Navigate to account settings (/account)", status: "passed" },
+          { description: "Update display name to 'John Smith'", status: "passed" },
+          { description: "Change email preferences", status: "passed" },
+          { description: "Upload new profile photo", status: "passed" },
+          { description: "Save all changes", status: "passed" },
+          { description: "Verify success notification appears", status: "passed" },
+          { description: "Confirm changes persist after page refresh", status: "passed" }
         ],
         attachments: [
-          { name: "profile-update.png", type: "image", path: "/screenshots/profile-update.png" }
+          { name: "profile-update-success.png", type: "image", path: "/screenshots/profile-update-success.png" },
+          { name: "settings-validation.png", type: "image", path: "/screenshots/settings-validation.png" }
         ],
         performance: { setup: 400, execution: 2800 }
       },
       {
-        title: "Search Functionality",
-        description: "tests/search/filters.spec.ts › User can filter search results",
+        title: "Product Search & Discovery",
+        description: "🤖 AI-Generated from: 'Customers should find products easily using search and filters'",
         status: "passed",
         duration: 1900,
         browser: "Chromium",
-        viewport: "Mobile",
+        viewport: "Mobile (375x667)",
         errorMessage: null,
         errorStack: null,
         steps: [
-          { description: "Enter search query", status: "passed" },
-          { description: "Apply filters", status: "passed" },
-          { description: "Verify filtered results", status: "passed" }
+          { description: "Open search interface", status: "passed" },
+          { description: "Enter search term: 'wireless headphones'", status: "passed" },
+          { description: "Apply price filter: $50-$200", status: "passed" },
+          { description: "Apply brand filter: Sony, Bose", status: "passed" },
+          { description: "Verify 12 relevant results displayed", status: "passed" },
+          { description: "Sort by customer rating (highest first)", status: "passed" },
+          { description: "Confirm search results are relevant", status: "passed" }
         ],
         attachments: [
-          { name: "search-results.png", type: "image", path: "/screenshots/search-results.png" }
+          { name: "search-results-mobile.png", type: "image", path: "/screenshots/search-results-mobile.png" },
+          { name: "filter-applied.png", type: "image", path: "/screenshots/filter-applied.png" }
         ],
         performance: { setup: 150, execution: 1750 }
       }
     ];
 
-    sampleTests.forEach(test => {
+    // Add more AI-generated test scenarios
+    const additionalTests: Omit<TestResult, 'id'>[] = [
+      {
+        title: "Newsletter Subscription",
+        description: "🤖 AI-Generated from: 'Visitors should be able to subscribe to our newsletter'",
+        status: "passed",
+        duration: 1200,
+        browser: "Chromium",
+        viewport: "Desktop (1920x1080)",
+        errorMessage: null,
+        errorStack: null,
+        steps: [
+          { description: "Scroll to newsletter section", status: "passed" },
+          { description: "Enter email: test@example.com", status: "passed" },
+          { description: "Click 'Subscribe' button", status: "passed" },
+          { description: "Verify success message", status: "passed" }
+        ],
+        attachments: [
+          { name: "newsletter-success.png", type: "image", path: "/screenshots/newsletter-success.png" }
+        ],
+        performance: { setup: 100, execution: 1100 }
+      },
+      {
+        title: "Guest Checkout Process",
+        description: "🤖 AI-Generated from: 'Customers should be able to purchase without creating an account'",
+        status: "passed",
+        duration: 4200,
+        browser: "Firefox",
+        viewport: "Desktop (1920x1080)",
+        errorMessage: null,
+        errorStack: null,
+        steps: [
+          { description: "Add product to cart", status: "passed" },
+          { description: "Proceed to checkout", status: "passed" },
+          { description: "Select 'Guest Checkout'", status: "passed" },
+          { description: "Enter shipping information", status: "passed" },
+          { description: "Select payment method", status: "passed" },
+          { description: "Review order summary", status: "passed" },
+          { description: "Complete purchase", status: "passed" }
+        ],
+        attachments: [
+          { name: "guest-checkout-flow.png", type: "image", path: "/screenshots/guest-checkout.png" },
+          { name: "order-confirmation.png", type: "image", path: "/screenshots/order-confirmation.png" }
+        ],
+        performance: { setup: 200, execution: 4000 }
+      }
+    ];
+
+    // Combine all test scenarios
+    const allTests = [...sampleTests, ...additionalTests];
+
+    allTests.forEach(test => {
       const id = randomUUID();
       this.testResults.set(id, { ...test, id });
     });
@@ -155,7 +223,15 @@ Expected: visible`,
 
   async createTestResult(insertResult: InsertTestResult): Promise<TestResult> {
     const id = randomUUID();
-    const result: TestResult = { ...insertResult, id };
+    const result: TestResult = { 
+      ...insertResult, 
+      id,
+      errorMessage: insertResult.errorMessage ?? null,
+      errorStack: insertResult.errorStack ?? null,
+      steps: insertResult.steps ?? null,
+      attachments: insertResult.attachments ?? null,
+      performance: insertResult.performance ?? null,
+    };
     this.testResults.set(id, result);
     return result;
   }

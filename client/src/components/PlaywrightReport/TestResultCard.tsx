@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ExternalLink, Check, X, Clock, Chrome, Smartphone, Image, Play, FileText, AlertTriangle } from "lucide-react";
+import { ChevronDown, ExternalLink, Check, X, Clock, Chrome, Smartphone, Image, Play, FileText, AlertTriangle, Brain, Lightbulb } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -70,6 +70,16 @@ export function TestResultCard({ test }: TestResultCardProps) {
   const attachments = test.attachments as TestAttachment[] || [];
   const performance = test.performance as TestPerformance || { setup: 0, execution: 0 };
 
+  // AI-generated insights (simulated)
+  const aiInsights = test.status === 'failed' ? [
+    "Selector stability issue detected - element may be dynamically loaded",
+    "Network timeout contributed to failure - consider increasing wait time",
+    "Self-healing capability will auto-fix this issue in next run"
+  ] : test.status === 'passed' ? [
+    "Test executed with optimal performance",
+    "All assertions validated successfully"
+  ] : [];
+
   const cardClasses = test.status === 'failed' 
     ? "border-red-200 dark:border-red-900/30 hover:shadow-lg hover:shadow-red-500/10"
     : "border-vercel-gray-200 dark:border-vercel-gray-800 hover:shadow-lg";
@@ -135,6 +145,24 @@ export function TestResultCard({ test }: TestResultCardProps) {
       {isExpanded && (
         <div className={`border-t ${test.status === 'failed' ? 'border-red-100 dark:border-red-900/30 bg-red-50 dark:bg-red-900/10' : 'border-vercel-gray-100 dark:border-vercel-gray-800 bg-vercel-gray-50 dark:bg-vercel-gray-900/50'}`}>
           <div className="p-6 space-y-4">
+            {/* AI Insights */}
+            {aiInsights.length > 0 && (
+              <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/20 dark:to-purple-950/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800 mb-4">
+                <div className="flex items-center space-x-2 mb-2">
+                  <Brain className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <h4 className="text-sm font-medium text-blue-900 dark:text-blue-200">AI Insights</h4>
+                </div>
+                <div className="space-y-2">
+                  {aiInsights.map((insight, index) => (
+                    <div key={index} className="flex items-start space-x-2 text-sm">
+                      <Lightbulb className="w-3 h-3 text-yellow-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-vercel-gray-700 dark:text-vercel-gray-300">{insight}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {test.status === 'failed' && (test.errorMessage || test.errorStack) && (
               <div className="bg-white dark:bg-vercel-gray-800 rounded-lg p-4 border-l-4 border-red-500 mb-4">
                 <h4 className="text-sm font-medium text-red-900 dark:text-red-200 mb-2">Error Details</h4>

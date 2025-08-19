@@ -1,4 +1,4 @@
-import { Search, Moon, Sun, Download, FlaskConical } from "lucide-react";
+import { Search, Moon, Sun, Download, FlaskConical, Sparkles, BarChart3 } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,8 +21,8 @@ export function Header({ onSearch, searchQuery }: HeaderProps) {
                 <FlaskConical className="text-white w-4 h-4" />
               </div>
               <div>
-                <h1 className="text-lg font-semibold">Playwright Report</h1>
-                <p className="text-xs text-vercel-gray-500 dark:text-vercel-gray-400">Test Suite Dashboard</p>
+                <h1 className="text-lg font-semibold">AI-Native Test Results</h1>
+                <p className="text-xs text-vercel-gray-500 dark:text-vercel-gray-400">Testing-as-a-Service Platform</p>
               </div>
             </div>
           </div>
@@ -56,6 +56,16 @@ export function Header({ onSearch, searchQuery }: HeaderProps) {
               variant="ghost"
               size="icon"
               className="rounded-lg bg-vercel-gray-100 dark:bg-vercel-gray-800 hover:bg-vercel-gray-200 dark:hover:bg-vercel-gray-700"
+              title="AI Insights"
+            >
+              <Sparkles className="w-4 h-4 text-vercel-gray-600 dark:text-vercel-gray-400" />
+            </Button>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-lg bg-vercel-gray-100 dark:bg-vercel-gray-800 hover:bg-vercel-gray-200 dark:hover:bg-vercel-gray-700"
+              title="Export Report"
             >
               <Download className="w-4 h-4 text-vercel-gray-600 dark:text-vercel-gray-400" />
             </Button>
