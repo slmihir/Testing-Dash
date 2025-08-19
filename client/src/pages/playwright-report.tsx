@@ -83,44 +83,6 @@ export default function PlaywrightReport() {
         <Header onSearch={setSearchQuery} searchQuery={searchQuery} />
         
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {/* Business Value Banner */}
-          <div className="mb-8 bg-gradient-to-r from-indigo-50 via-blue-50 to-cyan-50 dark:from-indigo-950/20 dark:via-blue-950/20 dark:to-cyan-950/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-vercel-gray-900 dark:text-vercel-gray-100 mb-2">
-                AI-Native Testing Performance
-              </h2>
-              <p className="text-vercel-gray-600 dark:text-vercel-gray-400">
-                Your tests were automatically generated and optimized using our AI platform
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <Zap className="text-white w-8 h-8" />
-                </div>
-                <div className="text-3xl font-bold text-green-600 dark:text-green-400">25x</div>
-                <div className="text-sm text-vercel-gray-600 dark:text-vercel-gray-400">Faster than traditional setup</div>
-                <div className="text-xs text-vercel-gray-500 dark:text-vercel-gray-500 mt-1">Industry: 3-6 months → Our Platform: &lt;7 days</div>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <Clock className="text-white w-8 h-8" />
-                </div>
-                <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">90%</div>
-                <div className="text-sm text-vercel-gray-600 dark:text-vercel-gray-400">Less maintenance overhead</div>
-                <div className="text-xs text-vercel-gray-500 dark:text-vercel-gray-500 mt-1">Self-healing capabilities reduce manual work</div>
-              </div>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <Shield className="text-white w-8 h-8" />
-                </div>
-                <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">&lt;10%</div>
-                <div className="text-sm text-vercel-gray-600 dark:text-vercel-gray-400">Test flakiness rate</div>
-                <div className="text-xs text-vercel-gray-500 dark:text-vercel-gray-500 mt-1">Industry average: 15% flakiness</div>
-              </div>
-            </div>
-          </div>
-
           <SummaryDashboard testSuite={testSuite} />
           
           <FilterBar
