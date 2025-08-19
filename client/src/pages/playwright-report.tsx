@@ -82,7 +82,7 @@ export default function PlaywrightReport() {
       <div className="min-h-screen bg-vercel-gray-50 dark:bg-vercel-gray-950 text-vercel-gray-900 dark:text-vercel-gray-100 transition-colors duration-300">
         <Header onSearch={setSearchQuery} searchQuery={searchQuery} />
         
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <SummaryDashboard testSuite={testSuite} />
           
           <FilterBar
@@ -93,11 +93,12 @@ export default function PlaywrightReport() {
             onBrowserFilterChange={setBrowserFilter}
           />
           
-          <section className="space-y-4">
+          <section className="space-y-6">
             {displayedTests.map((test, index) => (
               <div
                 key={test.id}
                 style={{ animationDelay: `${index * 0.1}s` }}
+                className="animate-slide-up"
               >
                 <TestResultCard test={test} />
               </div>
@@ -119,11 +120,11 @@ export default function PlaywrightReport() {
           )}
 
           {visibleTests < filteredTests.length && (
-            <div className="mt-8 text-center">
+            <div className="mt-12 text-center">
               <Button
                 onClick={loadMore}
                 variant="outline"
-                className="bg-white dark:bg-vercel-gray-900 border-vercel-gray-200 dark:border-vercel-gray-800 hover:shadow-md transition-all duration-200"
+                className="h-12 px-8 bg-white/80 dark:bg-vercel-gray-900/80 border-vercel-gray-200/60 dark:border-vercel-gray-800/60 hover:shadow-lg transition-all duration-200 rounded-xl backdrop-blur-sm font-medium"
               >
                 <ArrowUp className="w-4 h-4 mr-2 rotate-180" />
                 Load More Tests
@@ -133,20 +134,20 @@ export default function PlaywrightReport() {
         </main>
 
         {/* Floating Action Buttons */}
-        <div className="fixed bottom-6 right-6 flex flex-col space-y-3">
+        <div className="fixed bottom-8 right-8 flex flex-col space-y-4">
           <Button
             size="icon"
-            className="w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+            className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 backdrop-blur-sm"
           >
-            <Play className="w-4 h-4" />
+            <Play className="w-5 h-5" />
           </Button>
           <Button
             onClick={scrollToTop}
             size="icon"
             variant="secondary"
-            className="w-12 h-12 bg-vercel-gray-800 dark:bg-vercel-gray-700 hover:bg-vercel-gray-900 dark:hover:bg-vercel-gray-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-200"
+            className="w-14 h-14 bg-vercel-gray-800/90 dark:bg-vercel-gray-700/90 hover:bg-vercel-gray-900 dark:hover:bg-vercel-gray-600 text-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 backdrop-blur-sm"
           >
-            <ArrowUp className="w-4 h-4" />
+            <ArrowUp className="w-5 h-5" />
           </Button>
         </div>
       </div>

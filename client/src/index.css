@@ -70,8 +70,9 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased bg-gradient-to-br from-vercel-gray-50 via-white to-vercel-gray-100 dark:from-vercel-gray-950 dark:via-vercel-gray-900 dark:to-vercel-gray-800 text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background-attachment: fixed;
   }
   
   .animate-fade-in {

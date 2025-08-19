@@ -24,31 +24,31 @@ export function FilterBar({
   onBrowserFilterChange,
 }: FilterBarProps) {
   return (
-    <section className="mb-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
-        <div className="flex items-center space-x-4">
-          <h2 className="text-xl font-semibold">Test Results</h2>
-          <div className="flex items-center space-x-3">
-            <span className="px-3 py-1 text-sm bg-vercel-gray-100 dark:bg-vercel-gray-800 text-vercel-gray-600 dark:text-vercel-gray-400 rounded-full">
+    <section className="mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-6 sm:space-y-0">
+        <div className="flex items-center space-x-6">
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-vercel-gray-900 to-vercel-gray-600 dark:from-white dark:to-vercel-gray-300 bg-clip-text text-transparent">Test Results</h2>
+          <div className="flex items-center space-x-4">
+            <span className="px-4 py-2 text-sm bg-vercel-gray-100/80 dark:bg-vercel-gray-800/80 text-vercel-gray-700 dark:text-vercel-gray-300 rounded-xl font-medium shadow-sm">
               {totalTests} tests
             </span>
-            <span className="px-3 py-1 text-sm bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full flex items-center space-x-1">
-              <TrendingUp className="w-3 h-3" />
+            <span className="px-4 py-2 text-sm bg-gradient-to-r from-green-100 to-green-50 dark:from-green-900/30 dark:to-green-800/20 text-green-700 dark:text-green-300 rounded-xl flex items-center space-x-2 shadow-sm font-medium">
+              <TrendingUp className="w-3.5 h-3.5" />
               <span>AI-Optimized</span>
             </span>
-            <span className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full flex items-center space-x-1">
-              <Target className="w-3 h-3" />
+            <span className="px-4 py-2 text-sm bg-gradient-to-r from-blue-100 to-blue-50 dark:from-blue-900/30 dark:to-blue-800/20 text-blue-700 dark:text-blue-300 rounded-xl flex items-center space-x-2 shadow-sm font-medium">
+              <Target className="w-3.5 h-3.5" />
               <span>&lt;10% Flaky</span>
             </span>
           </div>
         </div>
         
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-4">
           <Select value={statusFilter} onValueChange={onStatusFilterChange}>
-            <SelectTrigger className="w-32 bg-white dark:bg-vercel-gray-900 border-vercel-gray-200 dark:border-vercel-gray-800">
+            <SelectTrigger className="w-40 h-11 bg-white/80 dark:bg-vercel-gray-900/80 border-vercel-gray-200/60 dark:border-vercel-gray-800/60 rounded-xl shadow-sm backdrop-blur-sm font-medium">
               <SelectValue placeholder="All Status" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="rounded-xl border-0 shadow-lg">
               <SelectItem value="all">All Status</SelectItem>
               <SelectItem value="passed">Passed</SelectItem>
               <SelectItem value="failed">Failed</SelectItem>
@@ -57,10 +57,10 @@ export function FilterBar({
           </Select>
           
           <Select value={browserFilter} onValueChange={onBrowserFilterChange}>
-            <SelectTrigger className="w-36 bg-white dark:bg-vercel-gray-900 border-vercel-gray-200 dark:border-vercel-gray-800">
+            <SelectTrigger className="w-44 h-11 bg-white/80 dark:bg-vercel-gray-900/80 border-vercel-gray-200/60 dark:border-vercel-gray-800/60 rounded-xl shadow-sm backdrop-blur-sm font-medium">
               <SelectValue placeholder="All Browsers" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="rounded-xl border-0 shadow-lg">
               <SelectItem value="all">All Browsers</SelectItem>
               <SelectItem value="chromium">Chromium</SelectItem>
               <SelectItem value="firefox">Firefox</SelectItem>
@@ -68,7 +68,7 @@ export function FilterBar({
             </SelectContent>
           </Select>
           
-          <Button variant="outline" className="bg-vercel-gray-100 dark:bg-vercel-gray-800 hover:bg-vercel-gray-200 dark:hover:bg-vercel-gray-700">
+          <Button variant="outline" className="h-11 px-6 bg-white/80 dark:bg-vercel-gray-900/80 hover:bg-vercel-gray-100 dark:hover:bg-vercel-gray-800 border-vercel-gray-200/60 dark:border-vercel-gray-800/60 rounded-xl shadow-sm backdrop-blur-sm font-medium transition-all duration-200">
             <Filter className="w-4 h-4 mr-2" />
             More Filters
           </Button>
