@@ -10,21 +10,33 @@ import { AuthProvider, useAuth } from "./lib/auth";
 import { useEffect } from "react";
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
-  const { isAuthed } = useAuth();
+  const { isAuthed, isReady } = useAuth();
   const [, navigate] = useLocation();
 
   useEffect(() => {
-    if (!isAuthed) navigate("/login");
-  }, [isAuthed, navigate]);
+    if (isReady && !isAuthed) navigate("/login");
+  }, [isReady, isAuthed, navigate]);
 
+  if (!isReady) return null;
   if (!isAuthed) return null;
   return children;
+}
+
+function LoginRoute() {
+  const { isAuthed, isReady } = useAuth();
+  const [, navigate] = useLocation();
+
+  useEffect(() => {
+    if (isReady && isAuthed) navigate("/");
+  }, [isReady, isAuthed, navigate]);
+
+  return <LoginPage />;
 }
 
 function Router() {
   return (
     <Switch>
-      <Route path="/login" component={LoginPage} />
+      <Route path="/login" component={LoginRoute} />
       <Route path="/" component={() => (
         <ProtectedRoute>
           <PlaywrightReport />
