@@ -13,23 +13,19 @@ export function Header({ onSearch, searchQuery }: HeaderProps) {
   
   const handleDownload = async () => {
     try {
-      const [suiteRes, resultsRes] = await Promise.all([
-        fetch('/api/test-suite'),
-        fetch('/api/test-results')
-      ]);
-      const suite = await suiteRes.json();
-      const results = await resultsRes.json();
-      const blob = new Blob([JSON.stringify({ suite, results }, null, 2)], { type: 'application/json' });
+      const res = await fetch('/api/report.pdf');
+      if (!res.ok) throw new Error('Failed to generate PDF');
+      const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = 'playwright-report.json';
+      link.download = 'playwright-report.pdf';
       document.body.appendChild(link);
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
     } catch (err) {
-      console.error('Failed to download report', err);
+      console.error('Failed to download PDF', err);
     }
   };
 
