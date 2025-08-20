@@ -13,7 +13,8 @@ export function Header({ onSearch, searchQuery }: HeaderProps) {
   
   const handleDownload = async () => {
     try {
-      const res = await fetch('/api/report.pdf');
+      // Use the separate PDF server on port 3001
+      const res = await fetch('http://localhost:3001/report.pdf');
       if (!res.ok) throw new Error('Failed to generate PDF');
       
       // Explicitly set the blob type to PDF

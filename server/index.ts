@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { startPdfServer } from "./pdfServer";
 
 const app = express();
 app.use(express.json());
@@ -21,8 +22,12 @@ app.use((req, res, next) => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
+      
+      // Only log JSON responses, skip binary responses like PDFs
+      if (capturedJsonResponse && res.getHeader('Content-Type') !== 'application/pdf') {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+      } else if (res.getHeader('Content-Type') === 'application/pdf') {
+        logLine += ` :: PDF (${res.getHeader('Content-Length')} bytes)`;
       }
 
       if (logLine.length > 80) {
@@ -56,6 +61,9 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
+  // Start PDF server on separate port
+  startPdfServer(3001);
+
   // ALWAYS serve the app on the port specified in the environment variable PORT
   // Other ports are firewalled. Default to 5000 if not specified.
   // this serves both the API and the client.
@@ -63,7 +71,7 @@ app.use((req, res, next) => {
   const port = parseInt(process.env.PORT || '5000', 10);
   server.listen({
     port,
-    host: "0.0.0.0",
+    host: "localhost",
   }, () => {
     log(`serving on port ${port}`);
   });
