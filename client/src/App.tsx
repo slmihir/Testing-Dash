@@ -1,4 +1,4 @@
-import { Switch, Route, useLocation } from "wouter";
+import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -11,11 +11,10 @@ import { useEffect } from "react";
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
   const { isAuthed, isReady } = useAuth();
-  const [, navigate] = useLocation();
 
   useEffect(() => {
-    if (isReady && !isAuthed) navigate("/login");
-  }, [isReady, isAuthed, navigate]);
+    if (isReady && !isAuthed) window.location.assign("/login");
+  }, [isReady, isAuthed]);
 
   if (!isReady) return null;
   if (!isAuthed) return null;
@@ -24,11 +23,10 @@ function ProtectedRoute({ children }: { children: JSX.Element }) {
 
 function LoginRoute() {
   const { isAuthed, isReady } = useAuth();
-  const [, navigate] = useLocation();
 
   useEffect(() => {
-    if (isReady && isAuthed) navigate("/");
-  }, [isReady, isAuthed, navigate]);
+    if (isReady && isAuthed) window.location.assign("/");
+  }, [isReady, isAuthed]);
 
   return <LoginPage />;
 }
