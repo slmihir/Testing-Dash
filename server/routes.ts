@@ -48,10 +48,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
       await browser.close();
 
+      // Set proper headers for PDF download
       res.setHeader("Content-Type", "application/pdf");
       res.setHeader("Content-Disposition", 'attachment; filename="playwright-report.pdf"');
+      res.setHeader("Content-Length", pdf.length);
+      res.setHeader("Cache-Control", "no-cache");
+      res.setHeader("Pragma", "no-cache");
+      res.setHeader("Expires", "0");
       res.send(pdf);
     } catch (error) {
+      console.error("PDF generation error:", error);
       res.status(500).json({ message: "Failed to generate PDF" });
     }
   });

@@ -15,17 +15,21 @@ export function Header({ onSearch, searchQuery }: HeaderProps) {
     try {
       const res = await fetch('/api/report.pdf');
       if (!res.ok) throw new Error('Failed to generate PDF');
-      const blob = await res.blob();
+      
+      // Explicitly set the blob type to PDF
+      const blob = new Blob([await res.arrayBuffer()], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
       link.download = 'playwright-report.pdf';
+      link.type = 'application/pdf';
       document.body.appendChild(link);
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
     } catch (err) {
       console.error('Failed to download PDF', err);
+      alert('Failed to download PDF. Please try again.');
     }
   };
 
