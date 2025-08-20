@@ -6,9 +6,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import PlaywrightReport from "@/pages/playwright-report";
 import NotFound from "@/pages/not-found";
 import LoginPage from "@/pages/login";
+import { AuthProvider, useAuth } from "./lib/auth";
 
 function ProtectedRoute({ component: Component }: { component: any }) {
-  const isAuthed = typeof window !== 'undefined' && localStorage.getItem("auth") === "1";
+  const { isAuthed } = useAuth();
   return isAuthed ? <Component /> : <Redirect to="/login" />;
 }
 
@@ -27,7 +28,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Router />
+        <AuthProvider>
+          <Router />
+        </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

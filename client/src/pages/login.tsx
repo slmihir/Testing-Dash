@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/lib/auth";
 
 export default function LoginPage() {
   const [, setLocation] = useLocation();
+  const { signIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,7 +28,7 @@ export default function LoginPage() {
       }
       const data = await res.json();
       if (data.success) {
-        localStorage.setItem("auth", "1");
+        signIn();
         setLocation("/");
       } else {
         setError("Invalid credentials");
