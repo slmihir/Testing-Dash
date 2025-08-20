@@ -13,12 +13,28 @@ export function Header({ onSearch, searchQuery }: HeaderProps) {
   
   const handleDownload = async () => {
     try {
+      console.log('Starting PDF download...');
+      
       // Use the separate PDF server on port 3001
-      const res = await fetch('http://localhost:3001/report.pdf');
-      if (!res.ok) throw new Error('Failed to generate PDF');
+      const res = await fetch('http://localhost:3001/report.pdf', {
+        method: 'GET',
+        mode: 'cors',
+      });
+      
+      console.log('Response status:', res.status);
+      console.log('Response headers:', Object.fromEntries(res.headers.entries()));
+      
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.error('Server error:', errorText);
+        throw new Error(`Failed to generate PDF: ${res.status} ${res.statusText}`);
+      }
       
       // Explicitly set the blob type to PDF
-      const blob = new Blob([await res.arrayBuffer()], { type: 'application/pdf' });
+      const arrayBuffer = await res.arrayBuffer();
+      console.log('Received data size:', arrayBuffer.byteLength);
+      
+      const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
@@ -28,9 +44,11 @@ export function Header({ onSearch, searchQuery }: HeaderProps) {
       link.click();
       link.remove();
       URL.revokeObjectURL(url);
+      
+      console.log('PDF download completed successfully');
     } catch (err) {
-      console.error('Failed to download PDF', err);
-      alert('Failed to download PDF. Please try again.');
+      console.error('Failed to download PDF:', err);
+      alert(`Failed to download PDF: ${err instanceof Error ? err.message : 'Unknown error'}`);
     }
   };
 

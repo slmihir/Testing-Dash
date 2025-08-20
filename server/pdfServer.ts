@@ -5,6 +5,18 @@ import { buildReportHtml } from "./reportTemplate";
 
 export function startPdfServer(port: number = 3001) {
   const server = createServer(async (req, res) => {
+    // Add CORS headers for cross-origin requests
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    
+    // Handle preflight OPTIONS request
+    if (req.method === 'OPTIONS') {
+      res.writeHead(200);
+      res.end();
+      return;
+    }
+    
     if (req.url === '/report.pdf' && req.method === 'GET') {
       try {
         const testSuite = await storage.getTestSuite();
